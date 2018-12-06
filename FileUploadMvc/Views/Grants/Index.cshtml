@@ -1,0 +1,96 @@
+﻿@model FileUploadMvc.Models.ViewModel
+
+@{
+    ViewBag.Title = "GRANTS";
+}
+<br />
+<div class="row">
+    <div class="col-md-2">
+        <div class="panel panel-default">
+            <div class="panel-heading"><h4 style="text-align:center;">Maintenance</h4></div>
+            <div class="panel-body" style="text-align:center;">
+                
+                <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#newGrantModal">New Grant</button>
+
+                @*@Html.ActionLink("Create New Grant", "NewGrant", "Grants", string.Empty, new { @Class = "btn btn-primary" })*@
+                <br />
+                @*<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal">Attach</button>*@
+            </div>
+        </div>
+    </div>
+    <div class="col-md-10">
+        <div class="panel panel-default">
+            <div class="panel-heading"><h3 style="text-align:center;">GRANTS</h3></div>
+            <div class="panel-body">
+                <table class="table table-striped">
+                    <tr>
+                        <th style="text-align:center;">Attachments</th>
+                        <th>@Html.DisplayNameFor(model => model.Grants[0].Id)</th>
+                        <th>@Html.DisplayNameFor(model => model.Grants[0].GrantNumber)</th>
+                        <th>@Html.DisplayNameFor(model => model.Grants[0].GrantName)</th>
+                        <th>@Html.DisplayNameFor(model => model.Grants[0].Division)</th>
+                        <th>Division</th>
+                        <th></th>
+                    </tr>
+                    @foreach (var item in Model.Grants)
+                    {
+                        <tr>
+                            <th style="text-align:center;"><span class="badge alert-success" style="text-align:center;">@Html.DisplayFor(modelItem => item.AttachmentCount)</span></th>
+                            <th>@Html.DisplayFor(modelItem => item.Id)</th>
+                            <th>@Html.ActionLink(item.GrantNumber.ToString(), "GetGrantDetails", "Grants", new { id = item.Id }, new { @class="btn btn-default" })</th>
+                            <th>@*@Html.ActionLink(modelItem  => item.GrantNumber,"GetGrantDetails","Grants", new { id = item.Id}, null)*@</th>
+                            <th>@Html.DisplayFor(modelItem => item.GrantName)</th>
+                            <th>@Html.DisplayFor(modelItem => item.Division)</th>
+                            <th>@Html.ActionLink(" ATTACH", "SelectAttachment", "Grants", new { id = item.Id }, new { @class="btn btn-primary glyphicon glyphicon-paperclip" })</th>
+                           @* <th><a href="@Url.Action("SelectAttachment", "Grants")" class="btn btn-warning"><span class="glyphicon glyphicon-paperclip"></span> Attach</a></th>*@
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Modal Header</h4>
+            </div>
+            <div class="modal-body">
+                @Html.Partial("_Attachments", Model)
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<div id="newGrantModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Modal Header</h4>
+            </div>
+            <div class="modal-body">
+                @Html.Partial("NewGrant", Model)
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+

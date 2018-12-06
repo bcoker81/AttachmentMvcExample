@@ -1,0 +1,66 @@
+﻿@model FileUploadMvc.Models.ViewModel
+
+
+<br />
+<div class="panel panel-default">
+    <div class="panel-heading"><h3 style="text-align:center;">Grant Details</h3></div>
+    <div class="panel-body">
+        <div class="form-horizontal">
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.Grant.GrantNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DisplayFor(model => model.Grant.GrantNumber, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Grant.GrantNumber, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Grant.GrantName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DisplayFor(model => model.Grant.GrantName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Grant.GrantName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Grant.Division, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DisplayFor(model => model.Grant.Division, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Grant.Division, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="panel panel-default">
+    <div class="panel-heading"><h3 style="text-align:center;">Attachments</h3></div>
+    <div class="panel-body">
+        <table class="table table-striped">
+
+            <tr>
+                <th>ID</th>
+                <th>File Type</th>
+                <th>File Name</th>
+                <th>Upload Date</th>
+            </tr>
+            @foreach (var item in Model.Attachments)
+            {
+                <tr>
+                    @*<th><span class="badge badge-primary">@Html.DisplayFor(Model=> Model.Attachments.AttachmentCount)</span></th>*@
+                    <th>@Html.DisplayFor(modelItem => item.Id)</th>
+                    <th>@Html.DisplayFor(modelItem => item.FileType)</th>
+                    <th>@Html.ActionLink(item.FileName,"OpenAttachment", "Grants", new { attachmentId = item.Id }, null)</th>
+                    <th>@Html.DisplayFor(modelItem => item.UploadDate)</th>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+
+
+
+

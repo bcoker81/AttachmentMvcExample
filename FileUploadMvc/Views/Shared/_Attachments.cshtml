@@ -1,0 +1,14 @@
+﻿@model FileUploadMvc.Models.ViewModel
+
+<form action="@Url.Action("Upload","Grants")" method="post" enctype="multipart/form-data">
+
+
+@Html.EditorFor(model => model.Grant.Id)
+@Html.EditorFor(model => model.Grant.GrantNumber)
+
+<label for="file">Filename:</label>
+<input type="file" name="file" id="file" />
+
+<input type="submit" />
+</form>
+@ViewBag.FileInfo
